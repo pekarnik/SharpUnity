@@ -1,16 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Geekbrains
+﻿namespace Geekbrains
 {
-    public class PlayerBall : Player
+    public sealed class PlayerBall : Player
     {
         private void FixedUpdate()
         {
             Move();
         }
-
     }
-
 }
