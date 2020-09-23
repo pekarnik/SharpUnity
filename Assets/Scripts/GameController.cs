@@ -8,7 +8,7 @@ namespace Geekbrains
     public sealed class GameController : MonoBehaviour, IDisposable
     {
         private List<InteractiveObject> _interactiveObjects;
-
+        private int numOfGoodBonuses;
         private void Awake()
         {
             _interactiveObjects = FindObjectsOfType<InteractiveObject>().ToList();
@@ -16,14 +16,36 @@ namespace Geekbrains
             foreach (var interactiveObject in _interactiveObjects)
             {
                 interactiveObject.Initialization(displayBonuses);
+                if(interactiveObject is GoodBonus)
+				{
+                    numOfGoodBonuses++;
+                    interactiveObject.OnDestroyChange += OnGoodBonusTake;
+				}
+                
                 interactiveObject.OnDestroyChange += InteractiveObjectOnOnDestroyChange;
             }
         }
-
-        private void InteractiveObjectOnOnDestroyChange(InteractiveObject value)
+        private void OnGoodBonusTake(InteractiveObject value)
+		{
+            numOfGoodBonuses--;
+        }
+		private void Start()
+		{
+            MainObjects.Player = FindObjectOfType<Player>();
+		}
+		private void InteractiveObjectOnOnDestroyChange(InteractiveObject value)
         {
             value.OnDestroyChange -= InteractiveObjectOnOnDestroyChange;
+            if (value is GoodBonus)
+            {
+                value.OnDestroyChange -= OnGoodBonusTake;
+                if(numOfGoodBonuses == 0)
+				{
+                    Win();
+				}
+            }
             _interactiveObjects.Remove(value);
+           
         }
 
         private void Update()
@@ -51,7 +73,11 @@ namespace Geekbrains
                 }
             }
         }
-
+        public void Win()
+		{
+            Debug.Log("Победа");
+            Destroy(MainObjects.Player);
+		}
         public void Dispose()
         {
             foreach (var o in _interactiveObjects)

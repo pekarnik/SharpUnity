@@ -19,9 +19,9 @@ namespace Geekbrains
         protected override void Interaction()
         {
             _view.Display(Point);
+            MainObjects.Player.BecomeImmortal(5);
             // Add bonus
         }
-
         public void Flay()
         {
             transform.localPosition = new Vector3(transform.localPosition.x,
@@ -41,5 +41,6 @@ namespace Geekbrains
         {
             return Point == other.Point;
         }
-    }
+
+	}
 }

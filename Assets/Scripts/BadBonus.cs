@@ -17,7 +17,7 @@ namespace Geekbrains
 
         protected override void Interaction()
         {
-            // Destroy player
+            Destroy(MainObjects.Player.gameObject);
         }
 
         public void Flay()

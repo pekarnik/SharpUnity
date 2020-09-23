@@ -22,7 +22,6 @@ namespace Geekbrains
         }
 
         protected abstract void Interaction();
-
         private void Start()
         {
             ((IAction)this).Action();
