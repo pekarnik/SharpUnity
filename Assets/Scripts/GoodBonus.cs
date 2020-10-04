@@ -12,6 +12,10 @@ namespace Geekbrains
 
         private void Awake()
         {
+			if (Point < 0)
+			{
+                throw new Exception("Очков меньше нуля");
+			}
             _material = GetComponent<Renderer>().material;
             _lengthFlay = Random.Range(0.5f, 1.0f);
         }
