@@ -4,20 +4,20 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.View
 {
-	public sealed class DisplayEndGame
+	public sealed class DisplayWinGame
 	{
 		private Text _finishGameLabel;
 
-		public DisplayEndGame(GameObject endGame)
+		public DisplayWinGame(GameObject endGame)
 		{
 			_finishGameLabel = endGame.GetComponentInChildren<Text>();
 			_finishGameLabel.text = String.Empty;
 
 		}
 
-		public void GameOver(string name, Color color)
+		public void GameOver()
 		{
-			_finishGameLabel.text = $"Вы проиграли. Вас убил {name} {color} цвета";
+			_finishGameLabel.text = $"Вы выиграли.";
 		}
 	}
 }
